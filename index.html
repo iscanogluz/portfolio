@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zulal Iscanoglu — Applied Researcher & Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,700&family=DM+Mono:wght@400;500&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0f1a;--card:#141c2e;--card2:#1a2236;--border:rgba(99,120,180,0.18);--accent:#7EB8C9;--accent2:#B8A9E3;--accent3:#6FCFA0;--accent4:#F0A07A;--text:#e8eaf0;--muted:#7a849a;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;font-size:16px;line-height:1.65;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2.5rem;background:rgba(11,15,26,0.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:2rem;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--muted);text-decoration:none;letter-spacing:0.05em;transition:color 0.2s;}
+.nav-links a:hover{color:var(--accent);}
+
+/* STARFIELD */
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.5;}
+section{position:relative;z-index:1;}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7rem 2rem 4rem;}
+.badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(126,184,201,0.1);border:1px solid rgba(126,184,201,0.3);border-radius:99px;padding:0.35rem 1rem;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--accent);letter-spacing:0.05em;margin-bottom:2rem;animation:fadeDown 0.8s ease both;}
+.badge-dot{width:7px;height:7px;background:var(--accent3);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+h1{font-family:'Fraunces',serif;font-size:clamp(2.6rem,6.5vw,5rem);font-weight:700;line-height:1.08;letter-spacing:-0.03em;margin-bottom:0.4rem;animation:fadeUp 0.9s 0.15s ease both;}
+h1 .name{color:var(--accent2);}
+.tagline{font-family:'Fraunces',serif;font-size:clamp(1.3rem,3.5vw,2.4rem);font-weight:300;color:var(--muted);margin-bottom:1.8rem;animation:fadeUp 0.9s 0.25s ease both;}
+.hero-desc{max-width:600px;font-size:0.97rem;color:var(--muted);line-height:1.8;margin-bottom:1.4rem;animation:fadeUp 0.9s 0.35s ease both;}
+.mission-pill{display:inline-block;background:rgba(111,207,160,0.1);border:1px solid rgba(111,207,160,0.3);border-radius:10px;padding:0.7rem 1.3rem;font-size:0.85rem;color:var(--accent3);max-width:580px;margin-bottom:2.4rem;animation:fadeUp 0.9s 0.4s ease both;line-height:1.65;text-align:center;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fadeUp 0.9s 0.45s ease both;}
+.btn-primary{background:var(--accent2);color:#0b0f1a;border:none;padding:0.8rem 1.8rem;border-radius:8px;font-family:'Sora',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;text-decoration:none;transition:opacity 0.2s,transform 0.2s;}
+.btn-primary:hover{opacity:0.88;transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border);padding:0.8rem 1.8rem;border-radius:8px;font-family:'Sora',sans-serif;font-size:0.9rem;cursor:pointer;text-decoration:none;transition:border-color 0.2s,color 0.2s,transform 0.2s;}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+.stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;padding:3rem 2rem 0;animation:fadeUp 0.9s 0.55s ease both;}
+.stat{text-align:center;}
+.stat-num{font-family:'Fraunces',serif;font-size:2.1rem;font-weight:700;letter-spacing:-0.03em;line-height:1;}
+.stat-label{font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--muted);letter-spacing:0.05em;margin-top:0.3rem;}
+.stat-sub{font-family:'DM Mono',monospace;font-size:0.63rem;color:var(--accent);letter-spacing:0.04em;}
+
+/* SECTION */
+.section-label{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.6rem;}
+.section-title{font-family:'Fraunces',serif;font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.5rem;}
+.section-sub{font-size:0.88rem;color:var(--muted);max-width:520px;margin-bottom:2rem;line-height:1.75;text-align:center;}
+
+/* FEATURED WORK */
+#work{padding:5rem 2rem 4rem;display:flex;flex-direction:column;align-items:center;}
+.chart-tabs{display:flex;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap;justify-content:center;}
+.chart-tab{font-family:'DM Mono',monospace;font-size:0.73rem;padding:0.45rem 1.1rem;border-radius:99px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s;letter-spacing:0.03em;}
+.chart-tab.active{background:var(--accent2);color:#0b0f1a;border-color:var(--accent2);font-weight:500;}
+.chart-panel{display:none;width:100%;max-width:820px;}
+.chart-panel.active{display:block;}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem 2rem 1.4rem;}
+.chart-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.4rem;flex-wrap:wrap;gap:0.5rem;}
+.chart-title{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:700;}
+.chart-meta{font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--muted);margin-top:0.25rem;}
+.chart-val{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;text-align:right;}
+.chart-badge{display:inline-block;background:rgba(111,207,160,0.15);color:var(--accent3);border-radius:6px;padding:0.15rem 0.5rem;font-family:'DM Mono',monospace;font-size:0.68rem;margin-top:0.2rem;}
+.chart-badge.warn{background:rgba(240,160,122,0.15);color:var(--accent4);}
+.chart-wrap{position:relative;height:260px;}
+.chart-source{font-family:'DM Mono',monospace;font-size:0.67rem;color:#7a849a;margin-top:0.8rem;text-align:right;}
+.chart-source a{color:var(--accent);text-decoration:none;}
+.chart-legend{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.8rem;justify-content:center;}
+.legend-item{display:flex;align-items:center;gap:0.4rem;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.narrative-box{background:var(--card2);border:1px solid var(--border);border-left:3px solid var(--accent3);border-radius:0 12px 12px 0;padding:1.2rem 1.5rem;margin-top:1.1rem;max-width:820px;width:100%;}
+.narrative-box p{font-size:0.85rem;color:var(--muted);line-height:1.8;}
+.narrative-box strong{color:var(--text);}
+
+/* SKILLS GRID */
+#skills{padding:5rem 2rem 4rem;display:flex;flex-direction:column;align-items:center;}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;max-width:820px;width:100%;}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color 0.2s,transform 0.2s;cursor:pointer;position:relative;}
+.skill-card:hover{border-color:var(--accent2);transform:translateY(-3px);}
+.skill-card:hover .skill-arrow{opacity:1;transform:translateX(0);}
+.skill-header{padding:1.3rem 1.4rem;}
+.skill-icon{font-size:1.35rem;margin-bottom:0.5rem;}
+.skill-name{font-family:'DM Mono',monospace;font-size:0.76rem;font-weight:500;color:var(--accent);letter-spacing:0.04em;margin-bottom:0.25rem;}
+.skill-desc{font-size:0.78rem;color:var(--muted);line-height:1.5;margin-bottom:0.6rem;}
+.skill-arrow{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--accent2);opacity:0;transform:translateX(-4px);transition:opacity 0.2s,transform 0.2s;letter-spacing:0.04em;}
+
+/* DRAWER OVERLAY */
+.drawer-overlay{position:fixed;inset:0;background:rgba(5,8,18,0.7);z-index:300;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.drawer-overlay.open{opacity:1;pointer-events:all;}
+
+/* DRAWER */
+.drawer{position:fixed;top:0;right:0;width:min(620px,100vw);height:100vh;background:#0f1524;border-left:1px solid var(--border);z-index:400;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);overflow-y:auto;display:flex;flex-direction:column;}
+.drawer.open{transform:translateX(0);}
+.drawer-header{padding:1.8rem 2rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;position:sticky;top:0;background:#0f1524;z-index:10;}
+.drawer-close{background:none;border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color 0.2s,color 0.2s;}
+.drawer-close:hover{border-color:var(--accent);color:var(--accent);}
+.drawer-title{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;letter-spacing:-0.02em;}
+.drawer-subtitle{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--accent);letter-spacing:0.06em;margin-top:0.3rem;}
+.drawer-body{padding:1.8rem 2rem;display:flex;flex-direction:column;gap:1.8rem;flex:1;}
+
+/* DRAWER SECTIONS */
+.dsec-label{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.7rem;border-bottom:1px solid var(--border);padding-bottom:0.5rem;}
+.dsec-text{font-size:0.85rem;color:var(--muted);line-height:1.8;}
+.dsec-text strong{color:var(--text);}
+
+/* CASE STUDY BOX */
+.case-study{background:var(--card2);border:1px solid var(--border);border-left:3px solid var(--accent2);border-radius:0 10px 10px 0;padding:1.1rem 1.3rem;}
+.case-study-title{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--accent2);letter-spacing:0.04em;margin-bottom:0.5rem;}
+.case-study p{font-size:0.82rem;color:var(--muted);line-height:1.75;}
+.case-study strong{color:var(--text);}
+
+/* TAGS */
+.tag-row{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.dtag{font-family:'DM Mono',monospace;font-size:0.63rem;padding:0.22rem 0.65rem;border-radius:99px;border:1px solid var(--border);color:var(--muted);}
+.dtag.hi{border-color:var(--accent3);color:var(--accent3);}
+.dtag.hi2{border-color:var(--accent2);color:var(--accent2);}
+
+/* LINKS */
+.link-list{display:flex;flex-direction:column;gap:0.6rem;}
+.dlink{display:flex;align-items:center;gap:0.6rem;padding:0.65rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:8px;text-decoration:none;transition:border-color 0.2s;}
+.dlink:hover{border-color:var(--accent);}
+.dlink-icon{font-size:1rem;flex-shrink:0;}
+.dlink-text{flex:1;}
+.dlink-title{font-size:0.82rem;color:var(--text);font-weight:600;}
+.dlink-meta{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);}
+.dlink-arrow{font-size:0.75rem;color:var(--muted);}
+
+/* MINI CHART IN DRAWER */
+.drawer-chart-wrap{height:180px;position:relative;}
+
+/* CONTACT */
+#contact{padding:5rem 2rem 6rem;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.contact-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3rem 2.5rem;max-width:560px;width:100%;}
+.contact-card p{font-size:0.9rem;color:var(--muted);margin-bottom:2rem;line-height:1.8;}
+.contact-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.contact-link{display:flex;align-items:center;gap:0.5rem;background:rgba(126,184,201,0.08);border:1px solid var(--border);border-radius:8px;padding:0.6rem 1.2rem;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--accent);text-decoration:none;transition:background 0.2s,border-color 0.2s;cursor:pointer;}
+.contact-link:hover{background:rgba(126,184,201,0.15);border-color:var(--accent);}
+
+footer{text-align:center;padding:1.5rem;font-family:'DM Mono',monospace;font-size:0.67rem;color:var(--muted);border-top:1px solid var(--border);position:relative;z-index:1;}
+
+@keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<!-- DRAWER OVERLAY -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+
+<!-- DRAWER -->
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <div>
+      <div class="drawer-title" id="drawerTitle"></div>
+      <div class="drawer-subtitle" id="drawerSubtitle"></div>
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+</div>
+
+<nav>
+  <div class="nav-logo">Z<span>.</span>Iscanoglu</div>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="badge"><span class="badge-dot"></span>Open to education analytics & mission-driven roles · Atlanta, GA</div>
+  <h1>Hi, I'm <span class="name">Zulal Iscanoglu</span></h1>
+  <div class="tagline">Applied Researcher & Data Analyst</div>
+  <p class="hero-desc">I turn complex longitudinal data into clear, human stories. With a PhD in Developmental Science and a decade of research with children, families, and justice-system-involved populations — I build evidence that moves people and policy.</p>
+  <div class="mission-pill">🎓 I believe education is the most powerful lever for breaking the intergenerational cycle of disadvantage. Data-driven schools change lives — and I want to help build them.</div>
+  <div class="hero-btns">
+    <a href="#work" class="btn-primary">View My Work →</a>
+    <a href="#contact" class="btn-outline">Get in Touch</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Years Research</div></div>
+    <div class="stat"><div class="stat-num">PhD</div><div class="stat-label">Developmental Science</div></div>
+    <div class="stat"><div class="stat-num">R · SPSS</div><div class="stat-label">Primary Tools</div><div class="stat-sub">+ SQL · Python · Power BI · Tableau</div></div>
+    <div class="stat"><div class="stat-num">Ed + Fam</div><div class="stat-label">Domain Focus</div><div class="stat-sub">Equity · Mobility · Adversity</div></div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="section-label">// featured data viz</div>
+  <h2 class="section-title">Data That Drives the Mission</h2>
+  <p class="section-sub">Two lenses on the same crisis — economic hardship and educational inequity — and why closing these gaps is the work that matters.</p>
+  <div class="chart-tabs">
+    <button class="chart-tab active" onclick="switchChart('poverty',this)">Child Poverty Rate</button>
+    <button class="chart-tab" onclick="switchChart('grad',this)">HS Graduation by Race</button>
+  </div>
+  <div class="chart-panel active" id="panel-poverty">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div><div class="chart-title">U.S. Child Poverty Rate</div><div class="chart-meta">Supplemental Poverty Measure (SPM) · 2009–2022</div></div>
+        <div><div class="chart-val">12.4%</div><div class="chart-badge warn">↑ post-CTC expiry</div></div>
+      </div>
+      <div class="chart-wrap"><svg id="povertyChart" viewBox="0 0 760 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible;"></svg></div>
+      <div class="chart-source">Source: U.S. Census Bureau, <a href="https://www.census.gov/topics/income-poverty/supplemental-poverty-measure.html" target="_blank">Supplemental Poverty Measure (SPM)</a></div>
+    </div>
+    <div class="narrative-box"><p>Child poverty is not a background statistic — it is the daily reality that shapes whether a student can focus in class, whether a family can afford supplies, whether a child's brain develops under chronic stress. <strong>The 2021 dip to 5.2%</strong> during the expanded Child Tax Credit showed that policy works. The rebound to 12.4% in 2022 shows how quickly gains reverse. Mission-driven schools operating in high-poverty communities sit at this intersection every single day.</p></div>
+  </div>
+  <div class="chart-panel" id="panel-grad">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div><div class="chart-title">U.S. High School Graduation Rate</div><div class="chart-meta">By Race/Ethnicity · ACGR · 2011–2022</div></div>
+        <div><div class="chart-val">~9pt</div><div class="chart-badge">gap persists</div></div>
+      </div>
+      <div class="chart-wrap"><svg id="gradChart" viewBox="0 0 760 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible;"></svg></div>
+      <div class="chart-legend" id="gradLegend"></div>
+      <div class="chart-source">Source: NCES, <a href="https://nces.ed.gov/programs/coe/indicator/coi" target="_blank">Adjusted Cohort Graduation Rate (ACGR)</a></div>
+    </div>
+    <div class="narrative-box"><p>Despite overall graduation rates rising to historic highs, <strong>a persistent gap</strong> separates white students from Black and Hispanic peers. These disparities reflect decades of under-resourced schools, concentrated poverty, and systemic disinvestment. High-performing charter networks and public schools working with underserved students directly target this gap — and <strong>analytics that track, explain, and act on disparities</strong> at the school and student level is exactly where I want to apply my skills.</p></div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label">// tools & domain expertise</div>
+  <h2 class="section-title">What I Bring to the Table</h2>
+  <p class="section-sub">Click any card to explore my experience, projects, and publications in that area.</p>
+  <div class="skills-grid">
+    <div class="skill-card" onclick="openDrawer('r')">
+      <div class="skill-header">
+        <div class="skill-icon">📊</div>
+        <div class="skill-name">R / SPSS</div>
+        <div class="skill-desc">Longitudinal modeling, SEM, MLM, APIM</div>
+        <div class="skill-arrow">View projects →</div>
+      </div>
+    </div>
+    <div class="skill-card" onclick="openDrawer('sql')">
+      <div class="skill-header">
+        <div class="skill-icon">📊</div>
+        <div class="skill-name">Tableau</div>
+        <div class="skill-desc">Interactive dashboards, demographic analysis, enrollment trends</div>
+        <div class="skill-arrow">View projects →</div>
+      </div>
+    </div>
+    <div class="skill-card" onclick="openDrawer('pbi')">
+      <div class="skill-header">
+        <div class="skill-icon">📈</div>
+        <div class="skill-name">Power BI</div>
+        <div class="skill-desc">Interactive dashboards for stakeholders</div>
+        <div class="skill-arrow">View projects →</div>
+      </div>
+    </div>
+    <div class="skill-card" onclick="openDrawer('research')">
+      <div class="skill-header">
+        <div class="skill-icon">🧪</div>
+        <div class="skill-name">Research Design</div>
+        <div class="skill-desc">Longitudinal studies, missing data, measurement</div>
+        <div class="skill-arrow">View projects →</div>
+      </div>
+    </div>
+    <div class="skill-card" onclick="openDrawer('equity')">
+      <div class="skill-header">
+        <div class="skill-icon">🏛️</div>
+        <div class="skill-name">Education & Family Equity</div>
+        <div class="skill-desc">Adversity, mobility, justice-involved families</div>
+        <div class="skill-arrow">View projects →</div>
+      </div>
+    </div>
+    <div class="skill-card" onclick="openDrawer('writing')">
+      <div class="skill-header">
+        <div class="skill-icon">📝</div>
+        <div class="skill-name">Dissemination</div>
+        <div class="skill-desc">Peer-reviewed writing, plain-language reports</div>
+        <div class="skill-arrow">View projects →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">// get in touch</div>
+  <h2 class="section-title">Let's Work Together</h2>
+  <div class="contact-card">
+    <p>I'm actively seeking roles in education analytics, applied research, or program evaluation — especially at mission-driven organizations focused on equity and student outcomes. Based in Atlanta, GA. Remote-friendly.</p>
+    <div class="contact-links">
+      <button onclick="navigator.clipboard.writeText('zulal.iscanoglu@gmail.com').then(()=>{this.textContent='✓ Copied!';setTimeout(()=>{this.textContent='✉ Copy Email'},2000)})" class="contact-link">✉ Copy Email</button>
+      <a href="https://www.linkedin.com/in/zulaliscanoglu/" target="_blank" class="contact-link">🔗 LinkedIn</a>
+      <a href="https://github.com/iscanogluz" target="_blank" class="contact-link">⌥ GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Zulal Iscanoglu · Applied Researcher & Education Data Analyst · Atlanta, GA</footer>
+
+<script>
+/* STARFIELD */
+(function(){
+  const canvas=document.getElementById('starfield'),ctx=canvas.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  function init(){resize();stars=[];for(let i=0;i<160;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+0.3,o:Math.random()*0.6+0.2,speed:Math.random()*0.25+0.05});}
+  function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.y+=s.speed;if(s.y>H){s.y=0;s.x=Math.random()*W;}ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(180,195,230,${s.o})`;ctx.fill();});requestAnimationFrame(draw);}
+  window.addEventListener('resize',init);init();draw();
+})();
+
+/* CHART TAB */
+function switchChart(id,btn){
+  document.querySelectorAll('.chart-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.chart-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* SVG CHART BUILDER */
+function buildChart(svgEl,datasets,opts){
+  while(svgEl.firstChild)svgEl.removeChild(svgEl.firstChild);
+  const W=opts.W||760,H=opts.H||260,padL=opts.padL||52,padR=24,padT=15,padB=45;
+  const cW=W-padL-padR,cH=H-padT-padB;
+  const {minV,maxV,years,yFmt,clipId,gridSteps}=opts;
+  const xS=i=>padL+(i/(years.length-1))*cW;
+  const yS=v=>padT+cH-((v-minV)/(maxV-minV))*cH;
+  const ns='http://www.w3.org/2000/svg';
+  const defs=document.createElementNS(ns,'defs');
+  let dh=`<clipPath id="${clipId}"><rect id="${clipId}R" x="${padL}" y="0" width="0" height="${H}"/></clipPath>`;
+  datasets.forEach((d,i)=>{dh+=`<linearGradient id="g${clipId}${i}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${d.color}" stop-opacity="0.22"/><stop offset="100%" stop-color="${d.color}" stop-opacity="0"/></linearGradient>`;});
+  defs.innerHTML=dh;svgEl.appendChild(defs);
+  gridSteps.forEach(v=>{
+    const y=yS(v);
+    const l=document.createElementNS(ns,'line');
+    l.setAttribute('x1',padL);l.setAttribute('x2',W-padR);l.setAttribute('y1',y);l.setAttribute('y2',y);
+    l.setAttribute('stroke','rgba(99,120,180,0.1)');l.setAttribute('stroke-width','1');svgEl.appendChild(l);
+    const t=document.createElementNS(ns,'text');
+    t.setAttribute('x',padL-7);t.setAttribute('y',y+4);t.setAttribute('text-anchor','end');
+    t.setAttribute('fill','#7a849a');t.setAttribute('font-size','9.5');t.setAttribute('font-family',"'DM Mono',monospace");
+    t.textContent=yFmt?yFmt(v):v;svgEl.appendChild(t);
+  });
+  years.forEach((yr,i)=>{
+    if(years.length>8&&i%2!==0)return;
+    const t=document.createElementNS(ns,'text');
+    t.setAttribute('x',xS(i));t.setAttribute('y',H-padB+18);t.setAttribute('text-anchor','middle');
+    t.setAttribute('fill','#7a849a');t.setAttribute('font-size','9.5');t.setAttribute('font-family',"'DM Mono',monospace");
+    t.textContent=yr;svgEl.appendChild(t);
+  });
+  datasets.forEach((d,di)=>{
+    const pts=d.data.map((r,i)=>[xS(i),yS(r)]);
+    let fd=`M ${pts[0][0]} ${yS(minV)} L ${pts[0][0]} ${pts[0][1]}`;
+    for(let i=1;i<pts.length;i++){const cx=(pts[i-1][0]+pts[i][0])/2;fd+=` C ${cx} ${pts[i-1][1]},${cx} ${pts[i][1]},${pts[i][0]} ${pts[i][1]}`;}
+    fd+=` L ${pts[pts.length-1][0]} ${yS(minV)} Z`;
+    const fp=document.createElementNS(ns,'path');
+    fp.setAttribute('d',fd);fp.setAttribute('fill',`url(#g${clipId}${di})`);fp.setAttribute('clip-path',`url(#${clipId})`);svgEl.appendChild(fp);
+    let ld=`M ${pts[0][0]} ${pts[0][1]}`;
+    for(let i=1;i<pts.length;i++){const cx=(pts[i-1][0]+pts[i][0])/2;ld+=` C ${cx} ${pts[i-1][1]},${cx} ${pts[i][1]},${pts[i][0]} ${pts[i][1]}`;}
+    const lp=document.createElementNS(ns,'path');
+    lp.setAttribute('d',ld);lp.setAttribute('stroke',d.color);lp.setAttribute('stroke-width','2.2');lp.setAttribute('fill','none');lp.setAttribute('clip-path',`url(#${clipId})`);svgEl.appendChild(lp);
+  });
+  const tip=document.createElementNS(ns,'g');
+  tip.style.cssText='opacity:0;pointer-events:none;transition:opacity 0.15s';
+  const tr=document.createElementNS(ns,'rect');
+  tr.setAttribute('rx','6');tr.setAttribute('fill','#0f1524');tr.setAttribute('stroke','rgba(99,120,180,0.4)');tr.setAttribute('stroke-width','1');
+  tip.appendChild(tr);
+  const tlines=[];
+  for(let i=0;i<=datasets.length;i++){
+    const t=document.createElementNS(ns,'text');
+    t.setAttribute('text-anchor','middle');t.setAttribute('font-size','10');t.setAttribute('font-family',"'DM Mono',monospace");
+    t.setAttribute('fill',i===0?'#e8eaf0':datasets[i-1]?.color||'#e8eaf0');
+    tip.appendChild(t);tlines.push(t);
+  }
+  svgEl.appendChild(tip);
+  const dg=document.createElementNS(ns,'g');
+  dg.style.cssText='opacity:0;transition:opacity 0.4s';
+  datasets.forEach((d,di)=>{
+    d.data.forEach((val,i)=>{
+      const [x,y]=[xS(i),yS(val)];
+      const c=document.createElementNS(ns,'circle');
+      c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r','4');
+      c.setAttribute('fill',d.color);c.setAttribute('stroke','#0b0f1a');c.setAttribute('stroke-width','2');c.style.cursor='pointer';
+      c.addEventListener('mouseenter',()=>{
+        c.setAttribute('r','6');
+        const tw=datasets.length>1?130:100,th=16+datasets.length*16;
+        let tx=x-tw/2;if(tx<padL)tx=padL;if(tx+tw>W-padR)tx=W-padR-tw;
+        const ty=y-th-12<padT?y+12:y-th-12;
+        tip.setAttribute('transform',`translate(${tx},${ty})`);
+        tr.setAttribute('width',tw);tr.setAttribute('height',th);
+        tlines[0].setAttribute('x',tw/2);tlines[0].setAttribute('y',14);tlines[0].textContent=years[i];
+        datasets.forEach((dd,ddi)=>{tlines[ddi+1].setAttribute('x',tw/2);tlines[ddi+1].setAttribute('y',14+(ddi+1)*15);tlines[ddi+1].textContent=`${dd.label}: ${yFmt?yFmt(dd.data[i]):dd.data[i]}`;});
+        tip.style.opacity='1';
+      });
+      c.addEventListener('mouseleave',()=>{c.setAttribute('r','4');tip.style.opacity='0';});
+      dg.appendChild(c);
+    });
+  });
+  svgEl.appendChild(dg);
+  let animated=false;
+  const cr=document.getElementById(`${clipId}R`);
+  function animate(){
+    if(animated)return;animated=true;
+    let start=null;
+    (function step(ts){
+      if(!start)start=ts;
+      const p=Math.min((ts-start)/1600,1);
+      const e=p<0.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+      cr.setAttribute('width',e*cW);
+      if(p<1)requestAnimationFrame(step);
+      else{cr.setAttribute('width',cW);dg.style.opacity='1';}
+    })(performance.now());
+  }
+  if(opts.autoAnimate){setTimeout(()=>animate(),200);}
+  else{new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)animate();});},{threshold:0.3}).observe(svgEl);}
+  return {animate};
+}
+
+/* BUILD MAIN CHARTS */
+buildChart(document.getElementById('povertyChart'),
+  [{label:'Rate',color:'#B8A9E3',data:[17.7,18.3,18.1,18.0,17.6,17.1,16.1,15.3,15.0,13.9,12.9,9.7,5.2,12.4]}],
+  {years:[2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],minV:4,maxV:20,gridSteps:[5,10,15,20],yFmt:v=>v+'%',clipId:'pov',padL:46}
+);
+buildChart(document.getElementById('gradChart'),
+  [{label:'White',color:'#7EB8C9',data:[86.6,87.6,87.6,88.3,88.6,89.4,89.7,89.1,89.9,90.8,90.4,90.3]},
+   {label:'Black',color:'#B8A9E3',data:[71.4,72.5,73.4,74.6,75.1,76.0,77.8,79.3,80.0,81.9,80.9,81.0]},
+   {label:'Hispanic',color:'#6FCFA0',data:[72.1,73.0,75.2,76.3,77.8,79.3,80.0,81.0,82.1,83.7,82.6,83.0]}],
+  {years:[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],minV:68,maxV:95,gridSteps:[70,75,80,85,90,95],yFmt:v=>v+'%',clipId:'grad',padL:50}
+);
+[['#7EB8C9','White students'],['#B8A9E3','Black students'],['#6FCFA0','Hispanic students']].forEach(([color,label])=>{
+  const el=document.getElementById('gradLegend');
+  const item=document.createElement('div');item.className='legend-item';
+  const dot=document.createElement('div');dot.className='legend-dot';dot.style.background=color;
+  item.appendChild(dot);item.appendChild(document.createTextNode(label));el.appendChild(item);
+});
+
+/* DRAWER DATA */
+const drawerData = {
+  r: {
+    title: 'R / SPSS',
+    subtitle: 'Statistical Modeling & Longitudinal Analysis',
+    description: `I use R and SPSS daily to wrangle, model, and interpret complex multi-wave data. My work includes building longitudinal datasets that track families from the prenatal period through 12 months postpartum, handling real-world messiness: attrition, missing data (handled with FIML), and nested data structures requiring multilevel modeling.<br><br>In an education context, these skills map directly to <strong>student growth models</strong>, <strong>value-added analysis</strong>, and <strong>longitudinal assessment tracking</strong> — answering questions like "Is this student on track?" and "Did this intervention actually work?"`,
+    caseStudy: {
+      title: '// Case Study: TLFB Alcohol & Family Stress Study',
+      text: 'Merged baseline and 6-month SPSS datasets across 200+ families, computing percentage of heavy drinking days, managing complex skip patterns, and running APIM models to examine how maternal and paternal alcohol use mutually influenced each other over time. Applied FIML to handle 10–15% attrition at follow-up.'
+    },
+    chartLabel: 'Simulated: Student Growth Percentiles by School Year',
+    chart: {
+      datasets:[{label:'Cohort SGP',color:'#B8A9E3',data:[42,45,51,55,58,62,67,71]}],
+      years:[2016,2017,2018,2019,2020,2021,2022,2023],
+      minV:30,maxV:80,gridSteps:[30,40,50,60,70,80],yFmt:v=>v+'th',clipId:'dr1',W:540,H:180,padL:46,autoAnimate:true
+    },
+    tags:[['MLM','hi'],['SEM','hi'],['APIM','hi'],['FIML'],['Longitudinal Design'],['R'],['SPSS'],['Value-Added Models','hi2']],
+    links:[
+      {icon:'📄',title:'Manuscript in preparation — Family Relations',meta:'APIM analysis of coparenting & parental stress · 2025',url:'#'},
+      {icon:'📄',title:'Cortisol & Adversity Study (in prep)',meta:'Hair & nail cortisol, prenatal stress exposure',url:'#'},
+      {icon:'⌥',title:'GitHub: Data Analysis Scripts',meta:'R syntax for longitudinal data wrangling',url:'https://github.com/iscanogluz'}
+    ]
+  },
+  sql: {
+    title: 'Tableau',
+    subtitle: 'Interactive Dashboards & Visual Analytics',
+    description: `I use Tableau to build interactive dashboards that make complex data immediately understandable for non-technical audiences. My focus is always on the decision the viewer needs to make — then I design backwards from there.<br><br>In education, that means dashboards that show <strong>enrollment trends by demographic</strong>, <strong>assessment score distributions by subgroup</strong>, and <strong>early warning indicators</strong> — built so a principal or program director can spot what needs attention in seconds, not minutes.`,
+    caseStudy: {
+      title: '// Case Study: Student Enrollment Dashboard',
+      text: 'Built a Tableau dashboard visualizing student enrollment across grade levels and demographic subgroups — showing shifts over time, identifying which grades were under-enrolled, and flagging demographic gaps that warranted further investigation. Designed for a non-technical leadership audience with filter controls for year, grade, and subgroup.'
+    },
+    chartLabel: 'Simulated: Student Enrollment by Grade & Demographic',
+    chart: { type:'stackedbar', clipId:'dr2' },
+    tags:[['Tableau','hi'],['Data Storytelling','hi'],['Interactive Dashboards','hi'],['Demographic Analysis','hi2'],['Filter Controls'],['Enrollment Analytics'],['Subgroup Reporting','hi2']],
+    links:[
+      {icon:'📊',title:'Student Enrollment Dashboard (placeholder)',meta:'Tableau · Demographic & grade-level trends',url:'#'},
+      {icon:'📊',title:'Assessment Score Distribution Dashboard (placeholder)',meta:'Tableau · Subgroup & school-level analysis',url:'#'},
+      {icon:'🔗',title:'LinkedIn Profile',meta:'linkedin.com/in/zulaliscanoglu',url:'https://www.linkedin.com/in/zulaliscanoglu/'}
+    ]
+  },
+  pbi: {
+    title: 'Power BI',
+    subtitle: 'Dashboards & Data Storytelling',
+    description: `I build dashboards that translate dense, multi-layered data into something actionable for non-technical audiences. My approach: start with the question a leader actually needs to answer, then build backwards to the data. Good dashboards don't just show numbers — they highlight what needs attention.<br><br>For schools, that means <strong>attendance trend monitoring</strong>, <strong>chronic absenteeism early warning flags</strong>, assessment score distributions by subgroup, and progress-toward-goal trackers — all designed so a principal can act in 30 seconds, not 30 minutes.`,
+    caseStudy: {
+      title: '// Case Study: Longitudinal Research Dashboard',
+      text: 'Built a tracking dashboard in Power BI to monitor data collection progress across 200+ families in a multi-wave study — flagging missing assessments, tracking completion rates by wave, and visualizing attrition patterns by demographic group. Used by the research team to prioritize follow-up outreach.'
+    },
+    chartLabel: 'Simulated: Chronic Absenteeism Heatmap — by Grade & Month',
+    chart: { type:'heatmap', clipId:'dr3' },
+    tags:[['Power BI','hi'],['Data Storytelling','hi'],['Early Warning Systems','hi2'],['Subgroup Reporting','hi2'],['Attendance Monitoring'],['Dashboard Design']],
+    links:[
+      {icon:'📄',title:'Research Tracking Dashboard (placeholder)',meta:'Power BI Longitudinal Study',url:'#'},
+      {icon:'🔗',title:'LinkedIn Profile',meta:'linkedin.com/in/zulaliscanoglu',url:'https://www.linkedin.com/in/zulaliscanoglu/'},
+      {icon:'⌥',title:'GitHub Portfolio',meta:'github.com/iscanogluz',url:'https://github.com/iscanogluz'}
+    ]
+  },
+  research: {
+    title: 'Research Design',
+    subtitle: 'Longitudinal Studies, Program Evaluation & Causal Inference',
+    description: `I design and execute rigorous quantitative studies — from measurement selection and power analysis to data collection, attrition management, and final analysis. My dissertation involved a multi-wave longitudinal design with a vulnerable population, tracking 200+ families from pregnancy through early parenthood.<br><br>In an education context, these skills translate directly to <strong>program evaluation</strong>: Was this reading intervention effective? For which students? Under which conditions? I can design the study, analyze the data, and communicate what the evidence actually says.`,
+    caseStudy: {
+      title: '// Case Study: Missing Data Strategy — Family Stress Study',
+      text: 'At the 6-month follow-up, 10 mothers and 15 fathers had missing data. I ran systematic comparisons between missing and complete cases, identified age as the key predictor of missingness (consistent with MAR), and applied Full Information Maximum Likelihood (FIML) estimation — preserving statistical power while producing unbiased estimates.'
+    },
+    chartLabel: 'Simulated: Intervention Effect on Reading Scores (Pre vs Post)',
+    chart: {
+      datasets:[
+        {label:'Control',color:'#7a849a',data:[48,49,50,51,52,53,54,55]},
+        {label:'Treatment',color:'#6FCFA0',data:[48,51,55,60,65,69,72,75]}
+      ],
+      years:['Wk 1','Wk 2','Wk 4','Wk 6','Wk 8','Wk 10','Wk 12','Wk 14'],
+      minV:40,maxV:80,gridSteps:[40,50,60,70,80],yFmt:v=>v,clipId:'dr4',W:540,H:180,padL:44,autoAnimate:true
+    },
+    tags:[['Program Evaluation','hi'],['Causal Inference','hi'],['FIML','hi'],['Multiple Imputation'],['Power Analysis'],['Attrition Management'],['Longitudinal Design','hi2'],['Mixed Methods']],
+    links:[
+      {icon:'📄',title:'Dissertation: Coparenting & Parental Stress (in prep)',meta:'Multi-wave longitudinal study · 2025',url:'#'},
+      {icon:'📄',title:'Manuscript — Family Relations (in prep)',meta:'APIM models, coparenting quality · 2025',url:'#'},
+      {icon:'⌥',title:'GitHub: Analysis Code',meta:'R scripts for longitudinal research',url:'https://github.com/iscanogluz'}
+    ]
+  },
+  equity: {
+    title: 'Education & Family Equity',
+    subtitle: 'Adversity, Intergenerational Mobility & Child Development',
+    description: `My research sits at the intersection of poverty, family stress, and child development — exactly the conditions that shape school readiness, chronic absenteeism, and long-term educational outcomes. I understand the <em>mechanisms</em>: how economic hardship dysregulates the stress response, how ACEs affect attention and executive function, and how <strong>high-quality schools can act as a protective buffer</strong> that interrupts these cycles.<br><br>This isn't background context for me — it is the reason I want to work in education analytics. I want to use data to find the students who need the most support, and make sure they get it.`,
+    caseStudy: {
+      title: '// Case Study: Socioeconomic Hardship & Coparenting Quality',
+      text: 'Examined how economic pressure during the prenatal period predicted coparenting quality at 6 months postpartum, and whether that relationship was moderated by social support. Findings suggested that even modest hardship was associated with reduced coparenting cooperation — with implications for early childhood programs that work with economically vulnerable families.'
+    },
+    chartLabel: 'U.S. Child Poverty Rate (SPM) · 2009–2022',
+    chart: {
+      datasets:[{label:'Rate',color:'#B8A9E3',data:[17.7,18.3,18.1,18.0,17.6,17.1,16.1,15.3,15.0,13.9,12.9,9.7,5.2,12.4]}],
+      years:[2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],
+      minV:4,maxV:20,gridSteps:[5,10,15,20],yFmt:v=>v+'%',clipId:'dr5',W:540,H:180,padL:46,autoAnimate:true
+    },
+    tags:[['Intergenerational Mobility','hi'],['ACEs & School Readiness','hi'],['Family Systems','hi2'],['Socioeconomic Hardship'],['Equity-Focused Research'],['Child Development'],['Justice-Involved Families']],
+    links:[
+      {icon:'📄',title:'Adversity & Family Functioning (in prep)',meta:'Prenatal stress, cortisol, & coparenting',url:'#'},
+      {icon:'📄',title:'Justice-Involved Families Project',meta:'Longitudinal study · alcohol use & family stress',url:'#'},
+      {icon:'🔗',title:'LinkedIn',meta:'linkedin.com/in/zulaliscanoglu',url:'https://www.linkedin.com/in/zulaliscanoglu/'}
+    ]
+  },
+  writing: {
+    title: 'Dissemination',
+    subtitle: 'Research Writing, Reports & Data Communication',
+    description: `I write for both academic and lay audiences. On the academic side: peer-reviewed manuscripts, IRB protocols, and grant reports. On the applied side: plain-language data memos, research briefs, and stakeholder presentations that turn complex findings into clear recommendations.<br><br>For education analytics, this means I can produce the full chain: run the analysis, write the internal memo, build the slide deck for the leadership meeting, and draft the external report for funders — without the findings getting lost in translation at any step.`,
+    caseStudy: {
+      title: '// Case Study: Open Scholarship Bootcamp',
+      text: 'Co-organized a multi-day open scholarship bootcamp for graduate students and faculty, covering reproducible research workflows, open data practices, and science communication. Developed materials covering R Markdown for reproducible reporting — directly relevant to building transparent, reproducible analytics pipelines in education settings.'
+    },
+    chartLabel: 'Simulated: Report Reach by Audience Type',
+    chart: {
+      datasets:[
+        {label:'Academic',color:'#B8A9E3',data:[2,3,4,5,6,7,8,9]},
+        {label:'Practitioner',color:'#6FCFA0',data:[1,2,4,7,10,13,16,20]}
+      ],
+      years:[2018,2019,2020,2021,2022,2023,2024,2025],
+      minV:0,maxV:25,gridSteps:[0,5,10,15,20,25],yFmt:v=>v+'k',clipId:'dr6',W:540,H:180,padL:44,autoAnimate:true
+    },
+    tags:[['Stakeholder Reports','hi'],['Data Memos','hi'],['Peer-Reviewed Writing','hi2'],['Grant Reporting'],['Presentations'],['Science Communication'],['R Markdown']],
+    links:[
+      {icon:'📄',title:'Manuscript — Family Relations (in prep)',meta:'APIM: coparenting & parental stress · 2025',url:'#'},
+      {icon:'📄',title:'Open Scholarship Bootcamp Materials',meta:'Reproducible research workflows',url:'#'},
+      {icon:'⌥',title:'GitHub: Reproducible Analysis',meta:'github.com/iscanogluz',url:'https://github.com/iscanogluz'}
+    ]
+  }
+};
+
+/* DRAWER OPEN/CLOSE */
+function openDrawer(key){
+  const data=drawerData[key];
+  document.getElementById('drawerTitle').textContent=data.title;
+  document.getElementById('drawerSubtitle').textContent=data.subtitle;
+
+  const body=document.getElementById('drawerBody');
+  body.innerHTML='';
+
+  // Description
+  const desc=document.createElement('div');
+  desc.innerHTML=`<div class="dsec-label">About this skill</div><p class="dsec-text">${data.description}</p>`;
+  body.appendChild(desc);
+
+  // Chart
+  const chartSec=document.createElement('div');
+  chartSec.innerHTML=`<div class="dsec-label">${data.chartLabel}</div><div class="drawer-chart-wrap"><svg id="drawerChart" viewBox="0 0 540 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible;"></svg></div>`;
+  body.appendChild(chartSec);
+
+  // Case study
+  const cs=document.createElement('div');
+  cs.innerHTML=`<div class="case-study"><div class="case-study-title">${data.caseStudy.title}</div><p>${data.caseStudy.text}</p></div>`;
+  body.appendChild(cs);
+
+  // Tags
+  const tagSec=document.createElement('div');
+  tagSec.innerHTML=`<div class="dsec-label">Tools & concepts</div><div class="tag-row">${data.tags.map(([t,cls])=>`<span class="dtag ${cls||''}">${t}</span>`).join('')}</div>`;
+  body.appendChild(tagSec);
+
+  // Links
+  const linkSec=document.createElement('div');
+  linkSec.innerHTML=`<div class="dsec-label">Projects & publications</div><div class="link-list">${data.links.map(l=>`<a href="${l.url}" target="_blank" class="dlink"><span class="dlink-icon">${l.icon}</span><span class="dlink-text"><div class="dlink-title">${l.title}</div><div class="dlink-meta">${l.meta}</div></span><span class="dlink-arrow">→</span></a>`).join('')}</div>`;
+  body.appendChild(linkSec);
+
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+
+  // Build chart after DOM update
+  requestAnimationFrame(()=>{
+    const svg=document.getElementById('drawerChart');
+    if(svg&&data.chart){
+      if(data.chart.type==='heatmap') buildHeatmap(svg);
+      else if(data.chart.type==='stackedbar') buildStackedBar(svg);
+      else buildChart(svg,data.chart.datasets,{...data.chart,clipId:data.chart.clipId+'_d'});
+    }
+  });
+}
+
+/* HEATMAP: Chronic Absenteeism by Grade & Month */
+function buildHeatmap(svg){
+  const ns='http://www.w3.org/2000/svg';
+  while(svg.firstChild)svg.removeChild(svg.firstChild);
+  const grades=['K','1st','2nd','3rd','4th','5th','6th','7th'];
+  const months=['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'];
+  // Simulated absenteeism % data [grade][month]
+  const data=[
+    [4,5,6,8,9,7,6,5,4],
+    [5,7,8,10,12,9,8,6,5],
+    [6,8,10,13,15,11,9,7,6],
+    [7,9,12,16,18,14,11,8,7],
+    [8,11,14,18,22,17,13,10,8],
+    [7,10,12,16,19,15,12,9,7],
+    [6,9,11,14,17,13,10,8,6],
+    [5,7,9,12,14,11,8,6,5]
+  ];
+  const W=520,H=170,padL=36,padT=24,padR=8,padB=28;
+  const cW=W-padL-padR, cH=H-padT-padB;
+  const cellW=cW/months.length, cellH=cH/grades.length;
+
+  // Color scale: low=dark blue, high=orange-red
+  function color(v){
+    const t=Math.min(v/25,1);
+    const r=Math.round(30+t*220), g=Math.round(100-t*70), b=Math.round(180-t*160);
+    return `rgb(${r},${g},${b})`;
+  }
+
+  // Month labels
+  months.forEach((m,i)=>{
+    const t=document.createElementNS(ns,'text');
+    t.setAttribute('x',padL+i*cellW+cellW/2);
+    t.setAttribute('y',padT-6);
+    t.setAttribute('text-anchor','middle');
+    t.setAttribute('fill','#7a849a');
+    t.setAttribute('font-size','8.5');
+    t.setAttribute('font-family',"'DM Mono',monospace");
+    t.textContent=m; svg.appendChild(t);
+  });
+
+  // Grade labels
+  grades.forEach((g,i)=>{
+    const t=document.createElementNS(ns,'text');
+    t.setAttribute('x',padL-4);
+    t.setAttribute('y',padT+i*cellH+cellH/2+4);
+    t.setAttribute('text-anchor','end');
+    t.setAttribute('fill','#7a849a');
+    t.setAttribute('font-size','8.5');
+    t.setAttribute('font-family',"'DM Mono',monospace");
+    t.textContent=g; svg.appendChild(t);
+  });
+
+  // Cells
+  const tip=document.createElementNS(ns,'g');
+  tip.style.cssText='opacity:0;pointer-events:none;transition:opacity 0.15s';
+  const tr=document.createElementNS(ns,'rect');
+  tr.setAttribute('rx','4');tr.setAttribute('fill','#0f1524');
+  tr.setAttribute('stroke','rgba(99,120,180,0.4)');tr.setAttribute('stroke-width','1');
+  tr.setAttribute('width','90');tr.setAttribute('height','28');
+  const tt=document.createElementNS(ns,'text');
+  tt.setAttribute('x','45');tt.setAttribute('y','12');
+  tt.setAttribute('text-anchor','middle');tt.setAttribute('fill','#e8eaf0');
+  tt.setAttribute('font-size','9');tt.setAttribute('font-family',"'DM Mono',monospace");
+  const tv=document.createElementNS(ns,'text');
+  tv.setAttribute('x','45');tv.setAttribute('y','23');
+  tv.setAttribute('text-anchor','middle');tv.setAttribute('fill','#F0A07A');
+  tv.setAttribute('font-size','9.5');tv.setAttribute('font-family',"'DM Mono',monospace");
+  tip.appendChild(tr);tip.appendChild(tt);tip.appendChild(tv);
+  svg.appendChild(tip);
+
+  data.forEach((row,gi)=>{
+    row.forEach((val,mi)=>{
+      const x=padL+mi*cellW, y=padT+gi*cellH;
+      const rect=document.createElementNS(ns,'rect');
+      rect.setAttribute('x',x+1);rect.setAttribute('y',y+1);
+      rect.setAttribute('width',cellW-2);rect.setAttribute('height',cellH-2);
+      rect.setAttribute('rx','2');
+      rect.setAttribute('fill',color(val));
+      rect.style.cursor='pointer';
+      rect.addEventListener('mouseenter',()=>{
+        let tx=x-45+cellW/2;
+        if(tx<padL)tx=padL;
+        if(tx+90>W-padR)tx=W-padR-90;
+        const ty=y-32<0?y+cellH+2:y-32;
+        tip.setAttribute('transform',`translate(${tx},${ty})`);
+        tt.textContent=`${grades[gi]} · ${months[mi]}`;
+        tv.textContent=`${val}% absent`;
+        tip.style.opacity='1';
+      });
+      rect.addEventListener('mouseleave',()=>tip.style.opacity='0');
+      svg.appendChild(rect);
+    });
+  });
+
+  // Legend
+  const lgW=100, lgH=8, lgX=padL, lgY=H-12;
+  for(let i=0;i<lgW;i++){
+    const r=document.createElementNS(ns,'rect');
+    r.setAttribute('x',lgX+i);r.setAttribute('y',lgY);
+    r.setAttribute('width','1');r.setAttribute('height',lgH);
+    r.setAttribute('fill',color(i/lgW*25));
+    svg.appendChild(r);
+  }
+  const lmin=document.createElementNS(ns,'text');
+  lmin.setAttribute('x',lgX);lmin.setAttribute('y',lgY+lgH+9);
+  lmin.setAttribute('fill','#7a849a');lmin.setAttribute('font-size','8');
+  lmin.setAttribute('font-family',"'DM Mono',monospace");
+  lmin.textContent='0%'; svg.appendChild(lmin);
+  const lmax=document.createElementNS(ns,'text');
+  lmax.setAttribute('x',lgX+lgW);lmax.setAttribute('y',lgY+lgH+9);
+  lmax.setAttribute('text-anchor','end');
+  lmax.setAttribute('fill','#7a849a');lmax.setAttribute('font-size','8');
+  lmax.setAttribute('font-family',"'DM Mono',monospace");
+  lmax.textContent='25%+'; svg.appendChild(lmax);
+  const llbl=document.createElementNS(ns,'text');
+  llbl.setAttribute('x',lgX+lgW+6);llbl.setAttribute('y',lgY+lgH/2+3);
+  llbl.setAttribute('fill','#7a849a');llbl.setAttribute('font-size','8');
+  llbl.setAttribute('font-family',"'DM Mono',monospace");
+  llbl.textContent='Absenteeism rate'; svg.appendChild(llbl);
+}
+
+/* STACKED BAR: Enrollment by Grade & Demographic */
+function buildStackedBar(svg){
+  const ns='http://www.w3.org/2000/svg';
+  while(svg.firstChild)svg.removeChild(svg.firstChild);
+  const grades=['K','1st','2nd','3rd','4th','5th','6th','7th'];
+  const groups=['Black','Hispanic','White','Other'];
+  const colors=['#B8A9E3','#6FCFA0','#7EB8C9','#F0A07A'];
+  // Simulated enrollment counts per grade per demographic
+  const data=[
+    [45,38,22,12],[42,35,20,11],[40,33,19,10],
+    [38,31,18,9],[35,29,17,9],[33,27,16,8],
+    [30,25,15,8],[28,23,14,7]
+  ];
+  const totals=data.map(r=>r.reduce((a,b)=>a+b,0));
+  const maxT=Math.max(...totals);
+
+  const W=520,H=170,padL=36,padT=20,padR=8,padB=30;
+  const cW=W-padL-padR, cH=H-padT-padB;
+  const barW=cW/grades.length*0.65;
+  const gap=cW/grades.length;
+
+  // Y gridlines
+  [0,50,100,150,200].forEach(v=>{
+    if(v>maxT+20)return;
+    const y=padT+cH-(v/maxT)*cH;
+    const l=document.createElementNS(ns,'line');
+    l.setAttribute('x1',padL);l.setAttribute('x2',W-padR);
+    l.setAttribute('y1',y);l.setAttribute('y2',y);
+    l.setAttribute('stroke','rgba(99,120,180,0.1)');l.setAttribute('stroke-width','1');
+    svg.appendChild(l);
+    const t=document.createElementNS(ns,'text');
+    t.setAttribute('x',padL-4);t.setAttribute('y',y+4);
+    t.setAttribute('text-anchor','end');t.setAttribute('fill','#7a849a');
+    t.setAttribute('font-size','8.5');t.setAttribute('font-family',"'DM Mono',monospace");
+    t.textContent=v; svg.appendChild(t);
+  });
+
+  // Tooltip
+  const tip=document.createElementNS(ns,'g');
+  tip.style.cssText='opacity:0;pointer-events:none;transition:opacity 0.15s';
+  const tr=document.createElementNS(ns,'rect');
+  tr.setAttribute('rx','4');tr.setAttribute('fill','#0f1524');
+  tr.setAttribute('stroke','rgba(99,120,180,0.4)');tr.setAttribute('stroke-width','1');
+  tr.setAttribute('width','110');tr.setAttribute('height','28');
+  const tt=document.createElementNS(ns,'text');
+  tt.setAttribute('x','55');tt.setAttribute('y','12');
+  tt.setAttribute('text-anchor','middle');tt.setAttribute('fill','#e8eaf0');
+  tt.setAttribute('font-size','9');tt.setAttribute('font-family',"'DM Mono',monospace");
+  const tv=document.createElementNS(ns,'text');
+  tv.setAttribute('x','55');tv.setAttribute('y','23');
+  tv.setAttribute('text-anchor','middle');
+  tv.setAttribute('font-size','9.5');tv.setAttribute('font-family',"'DM Mono',monospace");
+  tip.appendChild(tr);tip.appendChild(tt);tip.appendChild(tv);
+  svg.appendChild(tip);
+
+  // Bars
+  data.forEach((row,gi)=>{
+    const x=padL+gi*gap+(gap-barW)/2;
+    let cumY=0;
+    row.forEach((val,di)=>{
+      const barH=(val/maxT)*cH;
+      const y=padT+cH-cumY-barH;
+      const rect=document.createElementNS(ns,'rect');
+      rect.setAttribute('x',x);rect.setAttribute('y',y);
+      rect.setAttribute('width',barW);rect.setAttribute('height',barH);
+      rect.setAttribute('fill',colors[di]);
+      rect.setAttribute('rx', di===0?'3':'0');
+      rect.style.cursor='pointer';
+      rect.style.opacity='0.88';
+      rect.addEventListener('mouseenter',()=>{
+        rect.style.opacity='1';
+        let tx=x-55+barW/2;
+        if(tx<padL)tx=padL;
+        if(tx+110>W-padR)tx=W-padR-110;
+        const ty=y-32<0?y+barH+4:y-32;
+        tip.setAttribute('transform',`translate(${tx},${ty})`);
+        tt.textContent=`${grades[gi]} · ${groups[di]}`;
+        tv.setAttribute('fill',colors[di]);
+        tv.textContent=`${val} students`;
+        tip.style.opacity='1';
+      });
+      rect.addEventListener('mouseleave',()=>{rect.style.opacity='0.88';tip.style.opacity='0';});
+      svg.appendChild(rect);
+      cumY+=barH;
+    });
+
+    // X label
+    const t=document.createElementNS(ns,'text');
+    t.setAttribute('x',x+barW/2);t.setAttribute('y',H-padB+14);
+    t.setAttribute('text-anchor','middle');t.setAttribute('fill','#7a849a');
+    t.setAttribute('font-size','8.5');t.setAttribute('font-family',"'DM Mono',monospace");
+    t.textContent=grades[gi]; svg.appendChild(t);
+  });
+
+  // Legend
+  groups.forEach((g,i)=>{
+    const lx=padL+i*68, ly=H-8;
+    const dot=document.createElementNS(ns,'rect');
+    dot.setAttribute('x',lx);dot.setAttribute('y',ly-6);
+    dot.setAttribute('width','8');dot.setAttribute('height','8');
+    dot.setAttribute('rx','2');dot.setAttribute('fill',colors[i]);
+    svg.appendChild(dot);
+    const lt=document.createElementNS(ns,'text');
+    lt.setAttribute('x',lx+11);lt.setAttribute('y',ly+1);
+    lt.setAttribute('fill','#7a849a');lt.setAttribute('font-size','8');
+    lt.setAttribute('font-family',"'DM Mono',monospace");
+    lt.textContent=g; svg.appendChild(lt);
+  });
+}
+
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+</script>
+</body>
+</html>
